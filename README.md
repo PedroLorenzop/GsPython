@@ -19,7 +19,13 @@ Instalação das Dependências:
 -   Certifique-se de ter o Python instalado em sua máquina.
 
 - Instale as bibliotecas necessárias com o comando:
-    -   pip install dash plotly pandas
+    -   pip install dash
+    -   pip install plotly
+    -   pip install pandas
+
+      
+
+
 
 Execução:
 
