@@ -12,7 +12,7 @@ def gerar_valores_aleatorios():
         if len(valores) == 0:
             valores["pH"] = round(random.uniform(7.5, 8.5), 1)  #Valores de pH da água do mar simulando a realidade
         elif len(valores) == 1:
-            valores["Temperatura"] = round(random.uniform(10, 23))  #Temperatura em graus Celsius 
+            valores["Temperatura"] = round(random.uniform(10, 30))  #Temperatura em graus Celsius
         elif len(valores) == 2:
             valores["Turbidez"] = round(random.uniform(2, 100))  #Turbidez em NTU (Unidade Nefelométrica de Turbidez), medida usada para medir a turbidez
     return valores
@@ -38,47 +38,71 @@ def criar_dataframe():
                    "Oceano Ártico", "Oceano Ártico", "Oceano Ártico"]
     })
 
-df = criar_dataframe()
+#"Dicionário" para mapear cores
+cor_mapa = {
+    'Oceano Pacífico': '#49CF8F',  #Verde
+    'Oceano Atlântico': '#3744B9',  #Azul escuro
+    'Oceano Índico': '#4BC7D8',  #Azul esverdeado
+    'Oceano Ártico': '#4B6AD8',  #Azul claro 
+}
 
-#Criando layout do gráfico
-fig = px.bar(df, x="Dados", y="Quantidade", color="Oceano", barmode="group")
-
-opcoes = list(df['Oceano'].unique())
-opcoes.append('Todos os Oceanos')
-
-app.layout = html.Div(children=[
-    html.H1(children='Océan Sûr'),
-    html.H2(children=' "Mudamos a forma de ver o oceano" '),
-    html.P(children='''
-        Esta plataforma serve para ver e analisar como estão as condições do oceano
-    '''),
-    html.Div(id='texto'),
-    dcc.Dropdown(opcoes, value='Todos os Oceanos', id='lista_oceanos'),  #Gera o campo de escolha
-    dcc.Graph(
-        id='grafico_dados_oceanos',
-        figure=fig
-    ),
-    dcc.Interval(
-        id='intervalo',
-        interval=30*1000,  #Atualiza a cada 30 segundos (30000 milissegundos)
+#Layout do app.py
+app.layout = html.Div(
+    children=[
+        html.Div(id='cabecalho',children=[
+        html.Img(src='/assets/image.png', alt='logo dashboard'),
+        html.H1(children='Océan Sûr')]),
+        html.H2(children='"Mudamos a forma de ver os oceanos"'),
+        html.P(children='Esta plataforma serve para ver e analisar como estão as condições do oceano'),
+        dcc.Dropdown(
+            id='lista_oceanos',
+            options=[
+                {'label': 'Todos os Oceanos', 'value': 'Todos'},
+                {'label': 'Oceano Pacífico', 'value': 'Oceano Pacífico'},
+                {'label': 'Oceano Atlântico', 'value': 'Oceano Atlântico'},
+                {'label': 'Oceano Índico', 'value': 'Oceano Índico'},
+                {'label': 'Oceano Ártico', 'value': 'Oceano Ártico'}
+            ],
+            value='Todos',
+            className='dropdown',
+        ),
+        html.Div(
+            className='grafico-container',
+            children=[
+                dcc.Graph(
+                    id='grafico_condicoes_oceanos'
+                )
+            ]
+        ),
+        dcc.Interval(
+        id='intervalo-atualizacao',
+        interval=10*1000,  #Intervalo de 10 segundos, para trocar é so mudar o "10" lembre-se que está em segundos!
         n_intervals=0
-    )
-])
-
-@app.callback(
-    #Quem vai ser modificado
-    Output('grafico_dados_oceanos', 'figure'),
-    #Responsável por selecionar o valor e pelo intervalo de tempo
-    [Input('lista_oceanos', 'value'), Input('intervalo', 'n_intervals')]
+        )
+    ]
 )
-def atualiza_output(value, n):
-    df = criar_dataframe()  #Atualiza os dados
-    if value == 'Todos os Oceanos':
-        fig = px.bar(df, x="Dados", y="Quantidade", color="Oceano", barmode="group")
+
+#Callback para atualizar o gráfico toda vez que mexer no dropdown
+@app.callback(
+    Output('grafico_condicoes_oceanos', 'figure'),
+    [Input('lista_oceanos', 'value'),
+     Input('intervalo-atualizacao', 'n_intervals')]
+)
+def atualizar_grafico(oceano_selecionado, n_intervals):
+    df = criar_dataframe()  #Cria um novo dataframe com os valores atualizados a cada intervalo
+    if oceano_selecionado == 'Todos':
+        df_filtrado = df
     else:
-        tabela_filtrada = df.loc[df['Oceano'] == value, :]
-        fig = px.bar(tabela_filtrada, x="Dados", y="Quantidade", color="Oceano", barmode="group")
+        df_filtrado = df[df['Oceano'] == oceano_selecionado]
+    
+    fig = px.bar(df_filtrado, x='Dados', y='Quantidade', color='Oceano', barmode='group',
+                 color_discrete_map=cor_mapa)  #Aplica as cores
+    fig.update_layout(
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='white')
+    )
     return fig
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run_server(debug=True)

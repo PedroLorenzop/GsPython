@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+}
+
+body {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+}
+
+h2{
+    background-color: #2D2D2D;
+    margin: 26px 170px 26px 170px;
+    padding: 17px 184px;
+    border-radius: 10px;
+}
+
+h2, p {
+    color: white;
+    text-align: center;
+}
+
+#cabecalho{
+    background-color: #2D2D2D;
+    padding: 20px;
+    display: flex;
+}
+
+#lista_oceanos {
+    width: 11%;
+    margin: 0 auto;
+    color: white;
+    margin-top: 10px;
+}
+
+.grafico-container {
+    background-color: #2D2D2D;  /*Define a transparencia do container/grafico*/
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+}
+
+/*Estilos que foram trocados do dropdown*/
+.Select-menu {
+    background-color: #2D2D2D !important;  /*Fundo do dropdown quando abre*/
+    color: #FFFF;
+}
+
+.Select-control{
+    background-color: #5aa7ff !important;  /*Fundo da parte que mostra a opção escolhida*/
+    color: #000000 !important;  /*Cor da parte que mostra a opção escolhida, não ta funcionando aparentemente kkkkkk, mas melhor prevenir do que remediar*/
+    cursor: pointer;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.5);  /*Define a transparência do card*/
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
