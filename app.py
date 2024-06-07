@@ -76,7 +76,7 @@ app.layout = html.Div(
         ),
         dcc.Interval(
         id='intervalo-atualizacao',
-        interval=10*1000,  #Intervalo de 10 segundos, para trocar é so mudar o "10" lembre-se que está em segundos!
+        interval=30*1000,  #Intervalo de 30 segundos, para trocar é so mudar o "30" lembre-se que está em segundos!
         n_intervals=0
         )
     ]
