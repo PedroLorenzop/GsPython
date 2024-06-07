@@ -37,9 +37,9 @@ Acesso:
 - Abra o navegador e acesse http://127.0.0.1:8050 para visualizar a plataforma Océan Sûr.
 ## Authors
 
-- [@Pedro de Lorezno](https://github.com/PedroLorenzop)
-- [@Vinicius Castro](https://github.com/ViniciusCastroo)
-- [@Metheus Cantiere](https://github.com/matheuscantiere)
+- [@Pedro de Lorezno](https://github.com/PedroLorenzop) (RM554720)
+- [@Vinicius Castro](https://github.com/ViniciusCastroo) (RM558479)
+- [@Metheus Cantiere](https://github.com/matheuscantiere)(RM556137)
 
 ## License
 
