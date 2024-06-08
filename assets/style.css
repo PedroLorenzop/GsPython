@@ -34,6 +34,13 @@ h2, p {
     margin-top: 10px;
 }
 
+#lista_praias {
+    width: 11%;
+    margin: 0 auto;
+    color: white;
+    margin-top: 10px;
+}
+
 .grafico-container {
     background-color: #2D2D2D;  /*Define a transparencia do container/grafico*/
     border-radius: 10px;
@@ -59,4 +66,13 @@ h2, p {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
+}
+
+#tabs{
+    margin: 10px 170px 10px 170px;
+}
+
+#troca_secao{
+    background-color: #303030;
+    color: #fff;
 }
