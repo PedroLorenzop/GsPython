@@ -64,7 +64,6 @@ app.layout = html.Div(
                 {'label': 'Oceano Ártico', 'value': 'Oceano Ártico'}
             ],
             value='Todos',
-            className='dropdown',
         ),
         html.Div(
             className='grafico-container',
@@ -84,19 +83,20 @@ app.layout = html.Div(
 
 #Callback para atualizar o gráfico toda vez que mexer no dropdown
 @app.callback(
+    #Quem vai ser modificado
     Output('grafico_condicoes_oceanos', 'figure'),
+    #Responsável por selecionar o valor e pelo intervalo de tempo
     [Input('lista_oceanos', 'value'),
      Input('intervalo-atualizacao', 'n_intervals')]
 )
 def atualizar_grafico(oceano_selecionado, n_intervals):
-    df = criar_dataframe()  #Cria um novo dataframe com os valores atualizados a cada intervalo
+    df = criar_dataframe()  #Cria um novo dataframe com os valores atualizados a cada intervalo (basicamente atualiza os dados)
     if oceano_selecionado == 'Todos':
         df_filtrado = df
     else:
         df_filtrado = df[df['Oceano'] == oceano_selecionado]
     
-    fig = px.bar(df_filtrado, x='Dados', y='Quantidade', color='Oceano', barmode='group',
-                 color_discrete_map=cor_mapa)  #Aplica as cores
+    fig = px.bar(df_filtrado, x='Dados', y='Quantidade', color='Oceano', barmode='group', color_discrete_map=cor_mapa)  #color_discrete_map=cor_mapa Aplica as cores
     fig.update_layout(
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
