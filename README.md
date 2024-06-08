@@ -35,8 +35,13 @@ Execução:
 
 Acesso:
 - Abra o navegador e acesse http://127.0.0.1:8050 para visualizar a plataforma Océan Sûr.
-## Authores
 
+
+## link video explicativo
+
+- [video](https://youtu.be/Inma3c8fDHM)
+
+## Authores
 - [@Pedro de Lorezno](https://github.com/PedroLorenzop) (RM554720)
 - [@Vinicius Castro](https://github.com/ViniciusCastroo) (RM558479)
 - [@Metheus Cantiere](https://github.com/matheuscantiere)(RM556137)
