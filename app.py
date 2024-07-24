@@ -5,6 +5,7 @@ import random
 
 app = Dash(__name__)
 
+# Gera valores randomicos para as prais
 def gerar_valores_praias():
     valores = {}
     while len(valores) < 3:
@@ -15,7 +16,7 @@ def gerar_valores_praias():
         elif len(valores) == 2:
             valores["Turbidez"] = round(random.uniform(5, 50))  # Exemplo de turbidez para praias
     return valores
-
+# Gera valores randomicos para o oceano
 def gerar_valores_aleatorios():
     valores = {}
     while len(valores) < 3:
